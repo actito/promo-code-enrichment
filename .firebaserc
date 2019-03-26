@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "promo-code-enrichment"
+    "default": "promo-code-enrichment",
+    "actito-promo": "actito-promo"
   }
 }

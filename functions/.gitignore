@@ -1,2 +1,11 @@
 node_modules/
-credentials/
+
+# exclude files used by product
+product
+
+# exclude everything in credentials folder except credentials.js
+credentials/*
+!credentials/credentials.js
+
+# osx specific
+.DS_Store
