@@ -14,6 +14,11 @@ admin.initializeApp({
 const db = admin.firestore();
 const storage = admin.storage();
 
+// --------------------------------------------------
+// Reads a file from google storage and upload codes in firestore to be used to enrich offer assignments
+// - file must be a csv with one column named assignmentReference
+// - fileName must be an offerReference in offerCatalog table
+//
 exports.newFile = functions.storage.object().onFinalize(async data => {
   const filePath = data.name;
   const bucket = storage.bucket(data.bucket);
@@ -39,6 +44,24 @@ function readFile(filePath, bucket, data) {
       });
   });
 }
+
+// --------------------------------------------------
+// Called from ACTITO webhook to enrich assignment
+//
+// Signature of ACTITO webhook is:
+//     {
+//       "eventType": "CREATE",
+//       "isActive": true,
+//       "onFields": [
+//         "synchronized", "offerReference"
+//       ],
+//       "targetUrl": "xxxx"
+//     };
+//
+// where targetUrl is the url of this function when deployed to google cloud
+//
+// This function assumes that codes have been added to firestore database with the
+// `newFile` function defined earlier
 
 exports.webhookPost = functions.https.onRequest(async (req, res) => {
   const { data, tableId } = req.body;
