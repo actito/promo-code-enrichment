@@ -90,9 +90,15 @@ function put(tableId, id, docs) {
 
     const auth =
       "Basic " + new Buffer(actitoInfo.credentials.user + ":" + actitoInfo.credentials.password).toString("base64");
+
+    const environmentUrlMap = {
+      test: "https://test.actito.be/ActitoWebServices/ws/v4",
+      prod: "https://www.actito.be/ActitoWebServices/ws/v4"
+    };
+
     request.put(
       {
-        url: `${actitoInfo.url}/entity/${actitoInfo.entity}/customTable/${tableId}/record/${id}`,
+        url: `${environmentUrlMap[actitoInfo.env]}/entity/${actitoInfo.entity}/customTable/${tableId}/record/${id}`,
         headers: {
           "Content-Type": "application/json",
           Authorization: auth

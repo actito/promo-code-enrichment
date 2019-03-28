@@ -9,7 +9,7 @@ const serviceAccountKey = require("./google-private-key.json");
 //       "password": "password"
 //     },
 //     "entity": "entityName",
-//     "url": "url"
+//     "env": "test" or "prod"
 // };
 const actitoCredentials = require("./actito-credentials.json");
 

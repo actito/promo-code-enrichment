@@ -34,7 +34,7 @@ format should be:
       "password": "password"
     },
     "entity": "entityName",
-    "url": "url"
+    "env": "test" or "prod"
 };
 ```
 
