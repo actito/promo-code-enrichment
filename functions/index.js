@@ -63,7 +63,7 @@ function readFile(filePath, bucket, data) {
 // This function assumes that codes have been added to firestore database with the
 // `newFile` function defined earlier
 
-exports.webhookPost = functions.https.onRequest(async (req, res) => {
+exports.enrichAssignment = functions.https.onRequest(async (req, res) => {
   const { data, tableId } = req.body;
   const { id, offerReference, synchronized } = data;
 
@@ -106,9 +106,9 @@ function put(tableId, id, docs) {
         body: record,
         json: true
       },
-      function(error, response) {
+      function(error, response, body) {
         if (error || response.statusCode !== 200) {
-          console.error({ error, code: response.statusCode });
+          console.error({ error, code: response.statusCode, body });
         }
         resolve(response.statusCode);
       }

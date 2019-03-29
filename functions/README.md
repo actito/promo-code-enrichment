@@ -13,7 +13,7 @@ This package contains two functions:
    - file must be a csv with one column named assignmentReference
    - fileName must be an offerReference in offerCatalog table
 
-2. Second function: webhookPost
+2. Second function: enrichAssignment
 
    This function triggers the enrichment of the assignment record with a personalized coupon code from the firestore database.
 
@@ -95,11 +95,11 @@ format should be:
   "onFields": [
   	"synchronized", "offerReference"
   ],
-  "targetUrl": "google function webhookPost url"
+  "targetUrl": "google function enrichAssignment url"
 };
 ```
 
-- google function webhookPost url
+- google function enrichAssignment url
 
 ![](./readme/google-cloud-funcions.png)
 
@@ -131,7 +131,7 @@ format should be:
 
      ![](./readme/assignment-to-enrich.png)
 
-6. See in google that the function `webhookPost` has been called
+6. See in google that the function `enrichAssignment` has been called
 
    ![](./readme/assignment-function-run.png)
 
