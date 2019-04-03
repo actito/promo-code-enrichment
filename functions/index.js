@@ -19,11 +19,14 @@ const storage = admin.storage();
 // - file must be a csv with one column named assignmentReference
 // - fileName must be an offerReference in offerCatalog table
 //
-exports.newFile = functions.storage.object().onFinalize(async data => {
-  const filePath = data.name;
-  const bucket = storage.bucket(data.bucket);
-  await readFile(filePath, bucket, data);
-});
+exports.newFile = functions
+  .region("europe-west1")
+  .storage.object()
+  .onFinalize(async data => {
+    const filePath = data.name;
+    const bucket = storage.bucket(data.bucket);
+    await readFile(filePath, bucket, data);
+  });
 
 function readFile(filePath, bucket, data) {
   return new Promise(resolve => {
@@ -63,7 +66,7 @@ function readFile(filePath, bucket, data) {
 // This function assumes that codes have been added to firestore database with the
 // `newFile` function defined earlier
 
-exports.enrichAssignment = functions.https.onRequest(async (req, res) => {
+exports.enrichAssignment = functions.region("europe-west1").https.onRequest(async (req, res) => {
   const { data, tableId } = req.body;
   const { id, offerReference, synchronized } = data;
 
