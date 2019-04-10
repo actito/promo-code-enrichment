@@ -50,11 +50,11 @@ format should be:
 
   - Go to the service accounts tab
 
-    ![](./readme/service-accounts.png)
+    ![Service accounts tab](./readme/service-accounts.png)
 
   - Generate the private key
 
-    ![](./readme/generate-private-key.png)
+    ![Generate the private key](./readme/generate-private-key.png)
 
   save your firebase admin key to `.google-private-key.json`
 
@@ -68,7 +68,7 @@ format should be:
 
 2. Deploy functions
 
-   ```
+   ```bash
    cd /functions
    npm install
    npm run deploy
@@ -80,11 +80,11 @@ format should be:
 
    For test [actito api](https://test.actito.be/ActitoWebServices/doc/)
 
-   ![](./readme/custom-table-api.png)
+   ![Custom table api](./readme/custom-table-api.png)
 
 2. Complete form with your entityName and customTableName (name of the table assignment)
 
-   ![](./readme/create-webhook-subscription.png)
+   ![Webhook subscription api](./readme/create-webhook-subscription.png)
 
 3. Complete form with with webhookSubscription
 
@@ -93,7 +93,7 @@ format should be:
   "eventType": "CREATE",
   "isActive": true,
   "onFields": [
-  	"synchronized", "offerReference"
+    "synchronized", "offerReference"
   ],
   "targetUrl": "google function enrichAssignment url"
 };
@@ -101,11 +101,11 @@ format should be:
 
 - google function enrichAssignment url
 
-![](./readme/google-cloud-funcions.png)
+![Google cloud functions](./readme/google-cloud-funcions.png)
 
-![](./readme/google-cloud-function-url.png)
+![google cloud function url](./readme/google-cloud-function-url.png)
 
-4. Submit with `Try it out!` button
+1. Submit with `Try it out!` button
 
 ## See it in action
 
@@ -115,28 +115,28 @@ format should be:
 
    - Make sure toSynchronize is set to `true`
 
-   ![](./readme/springoffer-creation.png)
+   ![Spring offer creation](./readme/springoffer-creation.png)
 
 3. Upload file with the codes to your google storage.
    You have a test file here : `./functions/test/springoffer.csv`
-   ![](./readme/upload-to-storage.png)
+   ![Upload codes to storage](./readme/upload-to-storage.png)
 
 4. Check that the appropriate entries have been created in your firestore database
-   ![](./readme/assignment-codes-created.png)
+   ![See codes in the database](./readme/assignment-codes-created.png)
 
 5. Create a new assignment in your table
 
    - linked to springoffer
    - with `synchronized`set to false
 
-     ![](./readme/assignment-to-enrich.png)
+     ![Assignment to enrich](./readme/assignment-to-enrich.png)
 
 6. See in google that the function `enrichAssignment` has been called
 
-   ![](./readme/assignment-function-run.png)
+   ![Assignment function log](./readme/assignment-function-run.png)
 
 7. See that the assignment has been enriched
 
-   ![](./readme/assignment-enriched.png)
+   ![Enriched assignment](./readme/assignment-enriched.png)
 
 Voilà !
