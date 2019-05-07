@@ -1,0 +1,23 @@
+### customers
+
+GET https://{{shopifyRoot}}/customers.json
+
+### price rules
+
+GET https://{{shopifyRoot}}/price_rules/371912343638.json
+
+### discount codes
+
+GET https://{{shopifyRoot}}/price_rules/371912343638/discount_codes.json
+
+
+### update price rule
+
+PUT https://{{shopifyRoot}}/price_rules/371912343638.json
+
+{
+  "price_rule": {
+    "id": 371912343638,
+    "title": "WINTER SALE"
+  }
+}

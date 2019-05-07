@@ -7,9 +7,6 @@ typings/
 
 node_modules/
 
-# exclude files used by product
-product
-
 # exclude everything in credentials folder except credentials.js
 src/credentials/*
 !src/credentials/index.ts

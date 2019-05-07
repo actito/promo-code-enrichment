@@ -3,6 +3,7 @@ import { getProfile } from "@actito/data-model-sdk/lib/profiles";
 import { functions } from "./connectors/google";
 import { v4 as uuid } from "uuid";
 
+// tslint:disable-next-line: no-import-side-effect
 import "./init-actito";
 
 const PROFILE_TABLE = "Clients";

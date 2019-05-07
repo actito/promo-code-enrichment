@@ -1,0 +1,13 @@
+### enrich assigment
+
+http://localhost:5000/actito-promo-demo/us-central1/enrichAssignment
+Content-Type: application/json
+
+{
+  "id":21,
+  "tableType":"CUSTOM_TABLE",
+  "tableId":"bcae0862-281b-4c8f-a0cb-c7535ef8de11",
+  "fields":null,
+  "eventType":"CREATE",
+  "data":{"synchronized":"false","profileId":"1","businessKey":"20","id":20,"offerReference":"springoffer"}
+  }

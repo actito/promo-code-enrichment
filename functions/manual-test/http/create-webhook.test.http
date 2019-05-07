@@ -1,0 +1,49 @@
+
+### list tables
+
+GET https://test.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/customTable
+Authorization: Basic {{ws-token}}
+
+
+
+
+### create webhook on offer assignment created
+POST https://test.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/customTable/{{offerAssignmentsTable}}/webhookSubscription
+Authorization: Basic {{ws-token}}
+Content-Type: application/json
+
+{
+  "eventType": "CREATE",
+  "isActive": true,
+  "onFields": [
+  	"synchronized", "offerReference"
+  ],
+  "targetUrl": "{{function_root}}/enrichAssignment"
+};
+
+### create webhook for updated profile with first store visit
+POST https://test.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/table/{{profileTable}}/webhookSubscription
+Authorization: Basic {{ws-token}}
+Content-Type: application/json
+
+{
+  "eventType": "UPDATE",
+  "isActive": true,
+  "onFields": [
+  	"firstPurchaseDate"
+  ],
+  "targetUrl": "{{function_root}}/onFirstPurchase"
+};
+
+
+
+
+### list webhooks
+
+GET https://test.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/webhookSubscription?page=0&pageSize=100
+Authorization: Basic {{ws-token}}
+
+### delete webhook
+
+DELETE https://test.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/webhookSubscription/18
+Authorization: Basic {{ws-token}}

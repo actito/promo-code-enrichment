@@ -1,0 +1,64 @@
+
+### list tables
+
+GET https://www.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/customTable
+Authorization: Basic {{ws-token}}
+
+
+
+
+### create webhook on offer assignment created
+POST https://www.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/customTable/{{offerAssignmentsTable}}/webhookSubscription
+Authorization: Basic {{ws-token}}
+Content-Type: application/json
+
+{
+  "eventType": "CREATE",
+  "isActive": true,
+  "onFields": [
+  	"synchronized", "offerReference"
+  ],
+  "targetUrl": "{{function_root}}/enrichAssignment"
+};
+
+### create requestbin webhook on offer assignment created
+POST https://www.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/customTable/{{offerAssignmentsTable}}/webhookSubscription
+Authorization: Basic {{ws-token}}
+Content-Type: application/json
+
+{
+  "eventType": "CREATE",
+  "isActive": true,
+  "onFields": [
+  	"synchronized", "offerReference"
+  ],
+  "targetUrl": "http://requestbin.fullcontact.com/v63ewcv6"
+};
+
+
+### create webhook for updated profile with first store visit
+POST https://www.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/table/{{profileTable}}/webhookSubscription
+Authorization: Basic {{ws-token}}
+Content-Type: application/json
+
+{
+  "eventType": "UPDATE",
+  "isActive": true,
+  "onFields": [
+  	"firstPurchaseDate"
+  ],
+  "targetUrl": "{{function_root}}/onFirstPurchase"
+};
+
+
+
+
+### list webhooks
+
+GET https://www.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/webhookSubscription?page=0&pageSize=100
+Authorization: Basic {{ws-token}}
+
+### delete webhook
+
+DELETE https://www.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/webhookSubscription/18
+Authorization: Basic {{ws-token}}
