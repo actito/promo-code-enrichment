@@ -1,0 +1,67 @@
+
+### list model tables
+
+GET https://www.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/customTable
+Authorization: Basic {{ws-token}}
+
+
+### list profile tables
+
+GET https://www.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/table/Clients
+Authorization: Basic {{ws-token}}
+Accept: application/json
+
+
+### create webhook for offer assignment to enrich
+POST https://www.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/customTable/OfferAssignments/webhookSubscription
+Authorization: Basic {{ws-token}}
+Content-Type: application/json
+
+{
+  "eventType": "CREATE",
+  "isActive": true,
+  "onFields": [
+  	"synchronized", "offerReference"
+  ],
+  "targetUrl": "{{function_root}}/enrichAssignment"
+};
+
+
+### create webhook for updated profile with first store visit
+POST https://www.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/table/Clients/webhookSubscription
+Authorization: Basic {{ws-token}}
+Content-Type: application/json
+
+{
+  "eventType": "UPDATE",
+  "isActive": true,
+  "onFields": [
+  	"firstPurchaseDate"
+  ],
+  "targetUrl": "{{function_root}}/onFirstPurchase"
+};
+
+
+
+### list webhooks
+
+GET https://www.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/webhookSubscription?page=0&pageSize=100
+Authorization: Basic {{ws-token}}
+
+### delete webhook
+
+DELETE https://www.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/webhookSubscription/17
+Authorization: Basic {{ws-token}}
+
+
+### test requestBin
+GET https://requestbin.fullcontact.com/1fftbfq1
+
+
+
+### test function call
+
+GET http://localhost:5000/actito-promo/us-central1/enrichAssignment
+Content-Type: application/json
+
+{"data":{"profileId":109}}
