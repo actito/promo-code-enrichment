@@ -16,7 +16,7 @@ Content-Type: application/json
   "eventType": "CREATE",
   "isActive": true,
   "onFields": [
-  	"synchronized", "offerReference"
+  	"synchronized", "offerReference", "profileReference"
   ],
   "targetUrl": "{{function_root}}/enrichAssignment"
 };
@@ -30,9 +30,9 @@ Content-Type: application/json
   "eventType": "CREATE",
   "isActive": true,
   "onFields": [
-  	"synchronized", "offerReference"
+  	"synchronized", "offerReference", "profileReference"
   ],
-  "targetUrl": "http://requestbin.fullcontact.com/v63ewcv6"
+  "targetUrl": "http://requestbin.fullcontact.com/xt4fhlxt"
 };
 
 
@@ -60,5 +60,5 @@ Authorization: Basic {{ws-token}}
 
 ### delete webhook
 
-DELETE https://www.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/webhookSubscription/18
+DELETE https://www.actito.be/ActitoWebServices/ws/v4/entity/{{entity}}/webhookSubscription/19
 Authorization: Basic {{ws-token}}

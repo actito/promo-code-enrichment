@@ -1,10 +1,10 @@
 import { updateRecord, addRecord } from "@actito/data-model-sdk/lib/tables";
 import { getProfile } from "@actito/data-model-sdk/lib/profiles";
 import { functions } from "./connectors/google";
-import { v4 as uuid } from "uuid";
 
 // tslint:disable-next-line: no-import-side-effect
 import "./init-actito";
+import { addUserToDiscount, addCouponCodeToPriceRule } from "./connectors/shopify";
 
 const PROFILE_TABLE = "Clients";
 const ASSIGNMENTS_TABLE = "OfferAssignments";
@@ -14,10 +14,21 @@ const ASSIGNMENTS_TABLE = "OfferAssignments";
 
 export const enrichAssignment = functions.https.onRequest(async (req, res) => {
   const { data, tableId } = req.body;
-  const { id, synchronized } = data;
+  const { id, profileReference: email, offerReference, synchronized } = data;
   if (synchronized !== "true") {
-    const statuscode = await updateRecord(tableId, id, { synchronized: true, assignmentReference: uuid() });
-    res.send(`post request on actito api return with status ${statuscode}`);
+    const uniqueCode = Math.random()
+      .toString(36)
+      .substring(2, 15)
+      .toUpperCase();
+    try {
+      await addUserToDiscount(email, offerReference);
+      await addCouponCodeToPriceRule(offerReference, uniqueCode);
+      const statuscode = await updateRecord(tableId, id, { synchronized: true, assignmentReference: uniqueCode });
+      res.send(`post request on actito api return with status ${statuscode}`);
+    } catch (error) {
+      console.log("error from shopify" + error.toString());
+      res.status(500).send(error.toString());
+    }
   } else {
     res.send(`already synchronized`);
   }
